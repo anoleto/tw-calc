@@ -5,14 +5,12 @@ import pandas as pd
 
 from dash import dcc, html, dash_table
 from config import tws
+from thecalc import calculate_tw_multiplier
 
 class MultiplierCalculator:
     @staticmethod
     def calculate(tw: float) -> float:
-        return (
-            -(min((4 * (100 - tw) / 100) ** 2, 0.048) if tw < 100 else 0)
-            + ((tw - 100) * (1.02 ** ((tw - 100) / 5 - 1)) / 150 if tw > 103 else 0)
-        )
+        return calculate_tw_multiplier(tw)
 
 class TWCalculation:
     def __init__(self):
